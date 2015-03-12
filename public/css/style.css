@@ -1,0 +1,13 @@
+@import url("theme.css");
+
+
+/* ---- HOME ---- */
+#home li.list-group-item {
+	padding: 30px;
+	cursor: pointer;
+	border-bottom: 1px solid #ddd;
+}
+#home li.list-group-item:hover {
+	color: white;
+	background-color: #026aa8;
+}
