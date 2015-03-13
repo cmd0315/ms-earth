@@ -33,6 +33,16 @@ class ContactPerson extends Eloquent implements UserInterface, RemindableInterfa
     */
     protected $dates = ['deleted_at'];
 
+     /**
+     * Specify the kind of relationship between the registration and contact person model from the perspective of the contact person model
+     *
+     * @return dependency between the two models
+     */
+    public function registration()
+    {
+        return $this->belongsToMany('BCD\Registrations\Registration', 'contact_person_id', 'contact_person_id')->withTrashed(); //include soft deleted accounts
+    }
+
     /**
     * Register a contact_person
     *

@@ -1,5 +1,9 @@
 @import url("theme.css");
 
+li.list-group-item:hover, li.list-group-item:hover a {
+	color: white;
+	background-color: #026aa8;
+}
 
 /* ---- HOME ---- */
 #home li.list-group-item {
@@ -7,7 +11,47 @@
 	cursor: pointer;
 	border-bottom: 1px solid #ddd;
 }
-#home li.list-group-item:hover {
-	color: white;
-	background-color: #026aa8;
+
+/* ---- PARTICIPANT LIST ---- */
+
+
+/* Splash Message */
+.flash-msg {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    z-index: 10000;
+    border: none;
+    border-radius: 0;
+    padding: 18px 30px;
+    -webkit-box-shadow: 0 0 15px #999;
+    box-shadow: 0 0 15px #999;
+    min-width: 380px;
+    max-width: 480px;
+    text-align: center;
+}
+.alert {
+    clear: both;
+}
+.alert-success {
+    color: #192819!important;
+    background-color: #72AE59!important;
+}
+.alert-danger {
+    color: #fff!important;
+    background-color: #a94442!important;
+}
+.alert-info {
+    background-color: #31708f!important;
+}
+.alert, .alert p {
+    color: #fff!important;
+}
+.bg-danger {
+    background-color: #E74949;
+    color: #fff;
+}
+
+.alert a {
+    color: #fff;
 }

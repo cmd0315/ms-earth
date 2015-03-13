@@ -6,7 +6,7 @@ use BCD\Registrations\RegistrationRepository;
 use BCD\Participants\ParticipantRepository;
 use BCD\ContactPersons\ContactPersonRepository;
 use BCD\Registrations\ContactPersonRegistrationCommand;
-use BCD\Registrations\IndividualRegistrationCommand;
+use BCD\Registrations\AnotherPersonRegistrationCommand;
 use Laracasts\Validation\FormValidationException;
 
 class AnotherPersonRegistrationController extends \BaseController {
@@ -51,6 +51,7 @@ class AnotherPersonRegistrationController extends \BaseController {
 	function __construct(ContactPersonForm $contactPersonForm, RegisterParticipantForm $registerParticipantForm, RegistrationRepository $registrations, ContactPersonRepository $contact_persons, ParticipantRepository $participants) {
 		$this->contactPersonForm = $contactPersonForm;
 		$this->registerParticipantForm = $registerParticipantForm;
+		$this->registrations = $registrations;
 		$this->contact_persons = $contact_persons;
 		$this->participants = $participants;
 	}
@@ -74,7 +75,7 @@ class AnotherPersonRegistrationController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('another_person.contact_person_create', ['pageTitle' => 'Register Another Person']);
+		return View::make('forms.contact_person', ['pageTitle' => 'Register Another Person']);
 	}
 
 	/**
@@ -86,7 +87,7 @@ class AnotherPersonRegistrationController extends \BaseController {
 	public function createParticipantRegistration($contact_person_id)
 	{
 		$contact_person = $this->contact_persons->getPersonByID($contact_person_id);
-		return View::make('another_person.create', ['pageTitle' => 'Register Another Person'], compact('contact_person'));
+		return View::make('forms.another_person', ['pageTitle' => 'Register Another Person'], compact('contact_person'));
 	}
 
 	/**
@@ -133,9 +134,10 @@ class AnotherPersonRegistrationController extends \BaseController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param String $contact_person_id
 	 * @return Response
 	 */
-	public function storeParticipantRegistration()
+	public function storeParticipantRegistration($contact_person_id)
 	{
 		// Check form for error
 		try {
@@ -146,13 +148,13 @@ class AnotherPersonRegistrationController extends \BaseController {
 		}
 
 		// Extract post data
-		extract(Input::only('first_name', 'middle_name', 'last_name', 'street', 'city', 'province', 'email_address', 'contact_number'));
+		extract(Input::only('first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'registration_type'));
 
-		$contact_person_id = $this->contact_persons->generateID();
+		$registration_id = $this->registrations->generateRegistrationID();
 
 		// Execute command to insert contact person data
 		$registration = $this->execute(
-			new ContactPersonRegistrationCommand($contact_person_id, $first_name, $middle_name, $last_name, $street, $city, $province, $email_address, $contact_number)
+			new AnotherPersonRegistrationCommand($registration_id, $registration_type, $contact_person_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number)
 		);
 
 		/** 
@@ -161,13 +163,13 @@ class AnotherPersonRegistrationController extends \BaseController {
 		* Display Flash error message
 		*/
 		if($registration) {
-			return Redirect::route('another_person_registration.createParticipantRegistration', $contact_person_id);
+			return Redirect::route('results.show', $registration_id);
 		}
 		else {
 			Flash::error('Failed to register!');
 		}
 
-		return Redirect::route('another_person_registration.create');
+		return Redirect::route('another_person_registration.createParticipantRegistration');
 	}
 
 

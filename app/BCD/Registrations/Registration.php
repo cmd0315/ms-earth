@@ -34,7 +34,7 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
     protected $dates = ['deleted_at'];
 
     /**
-     * Specify the kind of relationship between the account and employee model from the perspective of the account model
+     * Specify the kind of relationship between the registration and participant model from the perspective of the registration model
      *
      * @return dependency between the two models
      */
@@ -44,13 +44,13 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
     }
 
      /**
-     * Specify the kind of relationship between the account and employee model from the perspective of the account model
+     * Specify the kind of relationship between the registration and contact person model from the perspective of the registration model
      *
      * @return dependency between the two models
      */
-    public function contact_persons()
+    public function contact_person()
     {
-        return $this->hasMany('BCD\ContactPersons\ContactPersons', 'contact_person_id', 'contact_person_id');
+        return $this->hasOne('BCD\ContactPersons\ContactPersons', 'contact_person_id', 'contact_person_id');
     }
 
     /**
@@ -65,6 +65,37 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         return $registration;
 
         //raise an event
+    }
+
+    /**
+    * Add registration entry for another person
+    *
+    * @param String
+    * @return Registration
+    */
+    public static function addAnotherPerson($registration_id, $registration_type, $contact_person_id) {
+        $registration = new static(compact('registration_id', 'registration_type', 'contact_person_id'));
+ 
+        return $registration;
+
+        //raise an event
+    }
+
+
+    public function getRegTypeAttribute() {
+        $reg_type = 'Individual';
+
+        if($this->registration_type == 1) {
+            $reg_type = 'APerson';
+        }
+        else if($this->registration_type == 2) {
+            $reg_type = 'Group';
+        }
+        else {
+            $reg_type = $reg_type;
+        }
+
+        return $reg_type;
     }
 
 }

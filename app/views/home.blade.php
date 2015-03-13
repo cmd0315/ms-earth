@@ -1,4 +1,4 @@
-@extends('layout.outer.master')
+@extends('layout.home-master')
 
 @section('content')
 <div class="col-lg-8 col-lg-offset-2" id="home">

@@ -60,7 +60,7 @@ class IndividualRegistrationController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('individual.create', ['pageTitle' => 'Individual Registration']);
+		return View::make('forms.individual', ['pageTitle' => 'Individual Registration']);
 	}
 
 

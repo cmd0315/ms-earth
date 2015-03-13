@@ -45,5 +45,4 @@ class RegistrationRepository {
 		return $registration_id;
 	}
 
-	
 }

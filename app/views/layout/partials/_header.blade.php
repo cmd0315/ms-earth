@@ -39,7 +39,12 @@
             </div>
             <div class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ URL::route('home') }}">HOME</a></li>
+                <li><a href="{{ URL::route('home') }}"><i class="fa fa-home fa-2x"></i></a></li>
+                @if(Auth::user())
+                <li><a href="{{ URL::route('sessions.signout') }}"><i class="fa fa-sign-out fa-2x"></i></a></li>
+                @else
+                <li><a href="{{ URL::route('sessions.create') }}">ADMIN</a></li>
+                @endif
               </ul>
             </div><!--/.nav-collapse -->
           </div>

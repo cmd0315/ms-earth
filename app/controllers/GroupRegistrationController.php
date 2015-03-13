@@ -1,6 +1,60 @@
 <?php
+use BCD\Core\CommandBus;
+use BCD\Forms\RegisterParticipantForm;
+use BCD\Forms\ContactPersonForm;
+use BCD\Registrations\RegistrationRepository;
+use BCD\Participants\ParticipantRepository;
+use BCD\ContactPersons\ContactPersonRepository;
+use BCD\Registrations\ContactPersonRegistrationCommand;
+use BCD\Registrations\AnotherPersonRegistrationCommand;
+use Laracasts\Validation\FormValidationException;
 
 class GroupRegistrationController extends \BaseController {
+
+	use CommandBus;
+
+	/**
+	* @var ContactPersonForm $contactPersonForm
+	*/
+	private $contactPersonForm;
+
+	/**
+	* @var RegisterParticipantForm $registerParticipantForm
+	*/
+	private $registerParticipantForm;
+
+	/**
+	* @var RegistrationRepository $registrations;
+	*/
+	private $registrations;
+
+	/**
+	* @var ContactPersonRepository $contact_persons;
+	*/
+	private $contact_persons;
+
+	/**
+	* @var ParticipantRepository $participants
+	*/
+	private $participants;
+
+
+	/**
+	* Constructor
+	*
+	* @param ContactPersonForm $contactPersonForm
+	* @param RegisterParticipantForm $registerParticipantForm
+	* @param RegistrationRepository $registrations
+	* @param ContactPersonRepository $contact_persons
+	* @param ParticipantRepository $participants
+	*/
+	function __construct(ContactPersonForm $contactPersonForm, RegisterParticipantForm $registerParticipantForm, RegistrationRepository $registrations, ContactPersonRepository $contact_persons, ParticipantRepository $participants) {
+		$this->contactPersonForm = $contactPersonForm;
+		$this->registerParticipantForm = $registerParticipantForm;
+		$this->registrations = $registrations;
+		$this->contact_persons = $contact_persons;
+		$this->participants = $participants;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -20,7 +74,18 @@ class GroupRegistrationController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('group.create', ['pageTitle' => 'Register Group']);
+		return View::make('forms.group_contact_person', ['pageTitle' => 'Register Group']);
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @param String $contact_person_id
+	 * @return Response
+	 */
+	public function createParticipantsRegistration($contact_person_id)
+	{
+		return View::make('forms.group', ['pageTitle' => 'Register Group']);
 	}
 
 
@@ -30,6 +95,47 @@ class GroupRegistrationController extends \BaseController {
 	 * @return Response
 	 */
 	public function store()
+	{
+		// Check form for error
+		try {
+			$this->contactPersonForm->validate(Input::all());
+		}
+		catch(FormValidationException $error) {
+			return Redirect::back()->withInput()->withErrors($error->getErrors());
+		}
+
+		// Extract post data
+		extract(Input::only('first_name', 'middle_name', 'last_name', 'street', 'city', 'province', 'email_address', 'contact_number'));
+
+		$contact_person_id = $this->contact_persons->generateID();
+
+		// Execute command to insert contact person data
+		$registration = $this->execute(
+			new ContactPersonRegistrationCommand($contact_person_id, $first_name, $middle_name, $last_name, $street, $city, $province, $email_address, $contact_number)
+		);
+
+		/** 
+		* If registration is successful, 
+		* go to form for registering participant
+		* Display Flash error message
+		*/
+		if($registration) {
+			return Redirect::route('group_registration.createParticipantsRegistration', $contact_person_id);
+		}
+		else {
+			Flash::error('Failed to register!');
+		}
+
+		return Redirect::route('group_registration.create');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param String $contact_person_id
+	 * @return Response
+	 */
+	public function storeParticipantsRegistration($contact_person_id)
 	{
 		//
 	}

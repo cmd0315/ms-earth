@@ -34,6 +34,16 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     protected $dates = ['deleted_at'];
 
     /**
+     * Specify the kind of relationship between the registration and participant model from the perspective of the participant model
+     *
+     * @return dependency between the two models
+     */
+    public function registration()
+    {
+        return $this->belongsTo('BCD\Registrations\Registration', 'registration_id', 'registration_id')->withTrashed(); //include soft deleted accounts
+    }
+
+    /**
     * Register a participant
     *
     * @param String
@@ -88,6 +98,14 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
         }
 
         return $segment;
+    }
+
+    public function getNameAttribute() {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->middle_name) . ' ' . ucfirst($this->last_name);
+    }
+
+    public function getAddressAttribute() {
+        return ucfirst($this->street) . ', ' . ucfirst($this->city) . ', ' . ucfirst($this->province);
     }
 
 }
