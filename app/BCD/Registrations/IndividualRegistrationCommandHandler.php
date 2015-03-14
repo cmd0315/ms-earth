@@ -49,14 +49,16 @@ class IndividualRegistrationCommandHandler implements CommandHandler {
 			$command->birthdate, $command->sex, $command->street, $command->city, $command->province, $command->email_address, $command->contact_number
 		);
 
-		$this->registrationRepository->save($registration);
-		$this->participantRepository->save($participant);
+		if($this->registrationRepository->save($registration) && $this->participantRepository->save($participant)) {
+			$recipient = $this->participantRepository->getParticipantByRegID($command->registration_id)->name;
 
+			Mail::send('emails.confirmation.message', ['recipient' => $recipient], function($message)
+			{
+			    $message->to('charissedalida@gmail.com', 'John Smith')->subject('Ms. Earth 2015 Fun Run Registration');
+			});
+		}
 		// Send e-mail confirmation
-		Mail::send('emails.welcome', ['name' => 'Charisse'], function($message)
-		{
-		    $message->to('charissedalida@gmail.com', 'John Smith')->subject('Welcome!');
-		});
+	
 		return $participant;
 	}
 }
