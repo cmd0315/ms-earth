@@ -5,7 +5,7 @@ use BCD\Registrations\Registration;
 use BCD\Registrations\RegistrationRepository;
 use BCD\Participants\Participant;
 use BCD\Participants\ParticipantRepository;
-
+use Mail;
 class IndividualRegistrationCommandHandler implements CommandHandler {
 
 	/**
@@ -53,7 +53,10 @@ class IndividualRegistrationCommandHandler implements CommandHandler {
 		$this->participantRepository->save($participant);
 
 		// Send e-mail confirmation
-
+		Mail::send('emails.welcome', ['name' => 'Charisse'], function($message)
+		{
+		    $message->to('charissedalida@gmail.com', 'John Smith')->subject('Welcome!');
+		});
 		return $participant;
 	}
 }
