@@ -84,14 +84,14 @@ class UserMailer extends Mailer {
 		$registration = $this->getRegistrationInfo($registration_id);
 
 		$recipient = $this->getRecipient($registration);
-		$recipientEmail = $recipient->email_address;
+		$recipientEmailAddress = $recipient->email_address;
 		// $recipientEmail = 'charissedalida@gmail.com';
 		$recipientName = $recipient->name;
 
 		$attachment = $this->getPDFAttachment($registration, $recipientName);
 		$attachmentName = "Waiver Form.pdf";
 
-		$this->sendTo($recipientEmail, $recipientName, $subject, $view, compact('recipientName', 'registration'), $attachment, $attachmentName);
+		$this->sendTo($recipientEmailAddress, $recipientName, $subject, $view, compact('recipientName', 'registration'), $attachment, $attachmentName);
 
 	}
 }
