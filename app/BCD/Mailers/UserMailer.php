@@ -84,8 +84,8 @@ class UserMailer extends Mailer {
 		$registration = $this->getRegistrationInfo($registration_id);
 
 		$recipient = $this->getRecipient($registration);
-		// $recipientEmail = e($recipient->email_address);
-		$recipientEmail = 'charissedalida@gmail.com';
+		$recipientEmail = e($recipient->email_address);
+		// $recipientEmail = 'charissedalida@gmail.com';
 		$recipientName = $recipient->name;
 
 		$attachment = $this->getPDFAttachment($registration, $recipientName);
