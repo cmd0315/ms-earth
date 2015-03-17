@@ -84,7 +84,7 @@ class UserMailer extends Mailer {
 		$registration = $this->getRegistrationInfo($registration_id);
 
 		$recipient = $this->getRecipient($registration);
-		$recipientEMail = $recipient->email_address;
+		$recipientEmail = $recipient->email_address;
 		// $recipientEmail = 'charissedalida@gmail.com';
 		$recipientName = $recipient->name;
 
