@@ -5,7 +5,8 @@ use BCD\Registrations\Registration;
 use BCD\Registrations\RegistrationRepository;
 use BCD\Participants\Participant;
 use BCD\Participants\ParticipantRepository;
-use Mail;
+use BCD\Mailers\UserMailer;
+
 class IndividualRegistrationCommandHandler implements CommandHandler {
 
 	/**
@@ -19,14 +20,22 @@ class IndividualRegistrationCommandHandler implements CommandHandler {
 	protected $participantRepository;
 
 	/**
+	* @var UserMailer $mailer
+	*/
+	protected $mailer;
+
+
+	/**
 	* Constructor
 	*
 	* @param RegistrationRepository $registrationRepository
 	* @param ParticipantRepository $participantRepository
+	* @param UserMailer $mailer
 	*/
-	function __construct(RegistrationRepository $registrationRepository, ParticipantRepository $participantRepository) {
+	function __construct(RegistrationRepository $registrationRepository, ParticipantRepository $participantRepository, UserMailer $mailer) {
 		$this->registrationRepository = $registrationRepository;
 		$this->participantRepository = $participantRepository;
+		$this->mailer = $mailer;
 	}
 
 
@@ -50,15 +59,10 @@ class IndividualRegistrationCommandHandler implements CommandHandler {
 		);
 
 		if($this->registrationRepository->save($registration) && $this->participantRepository->save($participant)) {
-			$recipient = $this->participantRepository->getParticipantByRegID($command->registration_id)->name;
-
-			Mail::send('emails.confirmation.message', ['recipient' => $recipient], function($message)
-			{
-			    $message->to('charissedalida@gmail.com', 'John Smith')->subject('Ms. Earth 2015 Fun Run Registration');
-			});
+			// Send e-mail confirmation
+			$mailUser = $this->mailer->confirmRegistration($command->registration_id);
 		}
-		// Send e-mail confirmation
-	
+
 		return $participant;
 	}
 }

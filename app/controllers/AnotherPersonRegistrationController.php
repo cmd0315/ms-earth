@@ -159,7 +159,7 @@ class AnotherPersonRegistrationController extends \BaseController {
 
 		/** 
 		* If registration is successful, 
-		* go to form for registering participant
+		* go to results page
 		* Display Flash error message
 		*/
 		if($registration) {

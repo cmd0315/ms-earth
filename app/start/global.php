@@ -51,6 +51,19 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+
+    // Log the error
+    Log::error($exception);
+
+    // Redirect to error route with any message
+    return Response::view('errors.missing', ['pageTitle' => 'Page Not Found', 'currentUser' => ''], 404);
+});
+
+App::missing(function($exception)
+{
+	return Response::view('errors.missing', ['pageTitle' => 'Page Not Found', 'currentUser' => ''], 404);
+});
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

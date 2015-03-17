@@ -68,6 +68,11 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
         return $age;
     }
 
+    /**
+    * Return race category that the Participant qualifies for
+    *
+    * @return String
+    */
     public function getCategoryAttribute() {
         $category = 'Seniors';
 
@@ -86,7 +91,12 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
 
         return strtoupper($category);
     }
-
+    
+    /**
+    * Return race segment that the Participant qualifies for
+    *
+    * @return String
+    */
     public function getSegmentAttribute() {
         $segment = 'Male';
 
@@ -100,12 +110,22 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
         return $segment;
     }
 
+    /**
+    * Return concatenated first, middle, and last names of Participant
+    *
+    * @return String
+    */
     public function getNameAttribute() {
-        return ucfirst($this->first_name) . ' ' . ucfirst($this->middle_name) . ' ' . ucfirst($this->last_name);
+        return $name = ucfirst($this->first_name) . ' ' . ucfirst($this->middle_name) . ' ' . ucfirst($this->last_name);
     }
 
+    /**
+    * Return concatenated first, middle, and last names of Participant
+    *
+    * @return String 
+    */
     public function getAddressAttribute() {
-        return ucfirst($this->street) . ', ' . ucfirst($this->city) . ', ' . ucfirst($this->province);
+        return $address = ucfirst($this->street) . ', ' . ucfirst($this->city) . ', ' . ucfirst($this->province);
     }
 
 }

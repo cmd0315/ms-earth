@@ -45,4 +45,15 @@ class RegistrationRepository {
 		return $registration_id;
 	}
 
+	/**
+	* Return instance of Registration
+	*
+	* @param String $registration_id
+	* @return Registration
+	*/
+	public function getRegistrationByRegID($registration_id) {
+
+		return Registration::whereRegistrationID($registration_id)->firstOrFail();
+	}
+
 }

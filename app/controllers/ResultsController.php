@@ -1,21 +1,21 @@
 <?php
 
-use BCD\Participants\ParticipantRepository;
+use BCD\Registrations\RegistrationRepository;
 
 class ResultsController extends \BaseController {
 
 	/**
-	* @var ParticipantRepository $participants
+	* @var RegistrationRepository $registrations
 	*/
-	private $participants;
+	private $registrations;
 
 	/**
 	* Constructor
 	*
-	* @param ParticipantRepository $participants
+	* @param RegistrationRepository $registrations
 	*/
-	function __construct(ParticipantRepository $participants) {
-		$this->participants = $participants;
+	function __construct(RegistrationRepository $registrations) {
+		$this->registrations = $registrations;
 	}
 
 	/**
@@ -59,9 +59,9 @@ class ResultsController extends \BaseController {
 	 */
 	public function show($registration_id)
 	{
-		$participant = $this->participants->getParticipantByRegID($registration_id);
-
-		return View::make('results', ['pageTitle' => 'Congratulations!'], compact('participant'));
+		$registration = $this->registrations->getRegistrationByRegID($registration_id);
+		
+		return View::make('results', ['pageTitle' => 'Congratulations!'], compact('registration'));
 	}
 
 

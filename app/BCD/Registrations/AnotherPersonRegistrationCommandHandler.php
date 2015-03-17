@@ -5,6 +5,7 @@ use BCD\Registrations\Registration;
 use BCD\Registrations\RegistrationRepository;
 use BCD\Participants\Participant;
 use BCD\Participants\ParticipantRepository;
+use BCD\Mailers\UserMailer;
 
 class AnotherPersonRegistrationCommandHandler implements CommandHandler {
 
@@ -19,14 +20,21 @@ class AnotherPersonRegistrationCommandHandler implements CommandHandler {
 	protected $participantRepository;
 
 	/**
+	* @var UserMailer $mailer
+	*/
+	protected $mailer;
+
+	/**
 	* Constructor
 	*
 	* @param RegistrationRepository $registrationRepository
 	* @param ParticipantRepository $participantRepository
+	* @param UserMailer $mailer
 	*/
-	function __construct(RegistrationRepository $registrationRepository, ParticipantRepository $participantRepository) {
+	function __construct(RegistrationRepository $registrationRepository, ParticipantRepository $participantRepository, UserMailer $mailer) {
 		$this->registrationRepository = $registrationRepository;
 		$this->participantRepository = $participantRepository;
+		$this->mailer = $mailer;
 	}
 
 
@@ -49,8 +57,10 @@ class AnotherPersonRegistrationCommandHandler implements CommandHandler {
 			$command->birthdate, $command->sex, $command->street, $command->city, $command->province, $command->email_address, $command->contact_number
 		);
 
-		$this->registrationRepository->save($registration);
-		$this->participantRepository->save($participant);
+		if($this->registrationRepository->save($registration) && $this->participantRepository->save($participant)) {
+			// Send e-mail confirmation
+			$mailUser = $this->mailer->confirmRegistration($command->registration_id);
+		}
 
 		// Send e-mail confirmation
 

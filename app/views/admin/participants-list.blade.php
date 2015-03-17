@@ -56,7 +56,9 @@
 				          <td>{{ e($participant->email_address) }}</td>
 				          <td>{{ e($participant->contact_number) }}</td>
 				          <td>{{ e($participant->registration->reg_type) }}</td>
-				          <td></td>
+				          @if($participant->registration->contactPerson)
+				          <td>{{ e($participant->registration->contactPerson->name) }}</td>
+				          @endif
 				        </tr>
 				        @endforeach
 				      </tbody>

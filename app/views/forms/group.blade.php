@@ -11,7 +11,7 @@
 			<div class="hline"></div>
 			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
 
-			{{ Form::open(['role' => 'form', 'route' => ['group_registration.storeParticipantsRegistration']]) }}
+			{{ Form::open(['role' => 'form', 'route' => ['group_registration.storeParticipantsRegistration', e($contact_person->contact_person_id)]]) }}
 				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
 						<div class="panel-heading" role="tab" id="headingOne">
@@ -218,7 +218,7 @@
 				</div><!-- .panel-group -->
 			  	<div class="row">
 			  		<div class="col-lg-12">
-			  			<input type="hidden" name="registration_type" id="registration_type" value="0">
+			  			<input type="hidden" name="registration_type" id="registration_type" value="2">
 			  			<button type="submit" class="btn btn-theme">Register</button>
 			  		</div>
 			  	</div><!--.row -->

@@ -40,7 +40,7 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
      */
     public function participants()
     {
-        return $this->hasOne('BCD\Participants\Participant', 'registration_id', 'registration_id');
+        return $this->hasMany('BCD\Participants\Participant', 'registration_id', 'registration_id');
     }
 
      /**
@@ -48,9 +48,9 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
      *
      * @return dependency between the two models
      */
-    public function contact_person()
+    public function contactPerson()
     {
-        return $this->hasOne('BCD\ContactPersons\ContactPersons', 'contact_person_id', 'contact_person_id');
+        return $this->hasOne('BCD\ContactPersons\ContactPerson', 'contact_person_id', 'contact_person_id');
     }
 
     /**
@@ -81,7 +81,11 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         //raise an event
     }
 
-
+    /**
+    * Return re-structured registration type
+    *
+    * @return Registration
+    */
     public function getRegTypeAttribute() {
         $reg_type = 'Individual';
 

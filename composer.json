@@ -8,7 +8,9 @@
 		"laracasts/flash" : "1.0",
 		"laracasts/validation" : "1.1.*",
 		"laracasts/commander" : "~1.0",
-		"guzzlehttp/guzzle": "~4.0"
+		"guzzlehttp/guzzle": "~4.0",
+		"thujohn/pdf": "dev-master",
+		"maatwebsite/excel": "1.*"
 	},
 	"autoload": {
 		"classmap": [

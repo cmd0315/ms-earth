@@ -40,7 +40,7 @@ class ContactPerson extends Eloquent implements UserInterface, RemindableInterfa
      */
     public function registration()
     {
-        return $this->belongsToMany('BCD\Registrations\Registration', 'contact_person_id', 'contact_person_id')->withTrashed(); //include soft deleted accounts
+        return $this->belongsTo('BCD\Registrations\Registration', 'contact_person_id', 'contact_person_id')->withTrashed(); //include soft deleted accounts
     }
 
     /**
@@ -50,11 +50,32 @@ class ContactPerson extends Eloquent implements UserInterface, RemindableInterfa
     * @return Contact Person
     */
     public static function add($contact_person_id, $first_name, $middle_name, $last_name, $street, $city, $province, $email_address, $contact_number) {
+        
         $contact_person = new static(compact('contact_person_id', 'first_name', 'middle_name', 'last_name', 'street', 'city', 'province', 'email_address', 'contact_number'));
  
         return $contact_person;
 
         //raise an event
+    }
+
+    /**
+    * Return concatenated first, middle, and last names of ContactPerson
+    *
+    * @return String
+    */
+    public function getNameAttribute() {
+
+        return $name = ucfirst($this->first_name) . ' ' . ucfirst($this->middle_name) . ' ' . ucfirst($this->last_name);
+    }
+    
+
+    /**
+    * Return concatenated street, city, and provincial addresses of ContactPerson
+    *
+    * @return String $name
+    */
+    public function getAddressAttribute() {
+        return $address = ucfirst($this->street) . ', ' . ucfirst($this->city) . ', ' . ucfirst($this->province);
     }
 
 }

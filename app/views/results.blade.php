@@ -4,13 +4,39 @@
 <div class="col-lg-8 col-lg-offset-2" id="home">
 	<h1>{{ isset($pageTitle) ? $pageTitle : '' }}</h1>
 	<br>
-	
+	<div class="hline"></div>
+	<p>	You have successfully registered to the event.</p>
+	<p>Etiam tristique eros eget purus pharetra, eu eleifend ligula tincidunt. Morbi interdum consequat ipsum, quis porttitor lorem tempor non. Duis ullamcorper nisl vel orci varius vehicula. Etiam molestie erat et leo pretium sagittis. Maecenas ut diam molestie, vehicula nisl nec, pulvinar ipsum. Nunc viverra ex et nibh efficitur rhoncus. Sed ornare mi odio, id bibendum nunc malesuada et. Etiam et elit vel est condimentum sodales. In ante mi, posuere eu congue pellentesque, luctus a augue. Quisque sodales, massa ut tincidunt aliquam, ligula enim suscipit dolor, a elementum nisl nibh vel nisl. Suspendisse luctus nunc mattis mi dapibus faucibus. Morbi imperdiet urna vel leo consequat imperdiet. Aliquam erat volutpat. Curabitur non magna elit.</p>
+
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<h4>Category: <span class="text-danger">{{ e($participant->category) }}</span></h4>
-			<h4>Segment: <span class="text-info">{{ e($participant->segment) }}</span></h4>
-			<div class="hline"></div>
-			<p>We sent you an email as a proof of your registration. Read the race event details in the attached waiver form. Print a copy and sign the waiver for. Present this to the ticket booth before the start of the race.</p>
+			<div class="row">
+				<div class="col-lg-6">
+					<h4>Registration Type: <span class="text-info">{{ e($registration->reg_type) }}</span></h4>
+					<h4>Participant/s:</h4>
+				</div>
+				<div class="col-lg-6">
+					<h4>Date Registered: {{ e($registration->created_at) }}</h4>
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Race Category</th>
+						<th>Race Segment</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($registration->participants as $participant)
+					<tr>
+						<td>{{ $participant->name }}</td>
+						<td>{{ $participant->category }}</td>
+						<td>{{ $participant->segment }}</td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
 			
 		</div>
 	</div>

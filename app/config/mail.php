@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => getenv('MAIL_SERVER'),
+	'driver' => getenv('MAIL_DRIVER'),
 
 	/*
 	|--------------------------------------------------------------------------

@@ -124,6 +124,8 @@ return array(
 		'Laracasts\Flash\FlashServiceProvider',
 		'Laracasts\Validation\ValidationServiceProvider',
 		'Laracasts\Commander\CommanderServiceProvider',
+		'Thujohn\Pdf\PdfServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
 
 	),
 
@@ -193,6 +195,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Carbon'		  => 'Carbon\Carbon',
 		'Flash'			  => 'Laracasts\Flash\Flash',
+		'PDF' 				=> 'Thujohn\Pdf\PdfFacade',
+		'Excel' 			=> 'Maatwebsite\Excel\Facades\Excel',
 
 	),
 
