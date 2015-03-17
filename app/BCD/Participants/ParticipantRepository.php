@@ -74,6 +74,71 @@ class ParticipantRepository {
 		}
 
 		return $seniors;
-	} 
+	}
+
+	public function getMaleParticipants($participants) {
+		$males = [];
+
+		foreach($participants as $participant) {
+			if($participant->sex == 0) {
+				array_push($males, $participant);
+			}
+		}
+
+		return $males;
+	}
+
+	public function getFemaleParticipants($participants) {
+		$females = [];
+
+		foreach($participants as $participant) {
+			if($participant->sex > 0) {
+				array_push($females, $participant);
+			}
+		}
+
+		return $females;
+	}
+
+
+	/**
+	* Return formatted results of table rows, to be used for exporting to excel
+	*
+	* @return array
+	*/
+	public function getCSVReport() {
+		$participants = $this->getAllParticipants();
+
+		$csvArray = [];
+		$count = 0;
+
+		foreach($participants as $participant) {
+
+			$participantArray = [
+				'#' => ++$count,
+				'Registration ID' => $participant->registration->registration_id,
+				'Registration Type' => $participant->registration->reg_type,
+				'Date Registered' => $participant->created_at->toDateTimeString(),
+				'First Name' => $participant->first_name,
+				'Middle Name' => $participant->middle_name,
+				'Last Name' => $participant->last_name,
+				'Birthdate' => $participant->birthdate,
+				'Sex' => $participant->segment,
+				'Street' => $participant->street,
+				'City' => $participant->city,
+				'Province' => $participant->province,
+				'Email Address' => $participant->email_address,
+				'Contact Number' => $participant->contact_number
+			];
+
+			if($participant->registration->contactPerson) {
+				$participantArray['Contact Person'] = $participant->registration->contactPerson->name;
+			}
+
+			array_push($csvArray, $participantArray);
+		}
+
+		return $csvArray;
+	}
 	
 }

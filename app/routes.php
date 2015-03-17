@@ -17,6 +17,8 @@ Route::get('group_registration/partcipants_registration/{contact_person_id}', ['
 Route::post('group_registration/partcipants_registration/{contact_person_id}', ['as' => 'group_registration.storeParticipantsRegistration', 'uses' => 'GroupRegistrationController@storeParticipantsRegistration']);
 Route::resource('group_registration', 'GroupRegistrationController');
 
+
+Route::resource('contact_person', 'ContactPersonController');
 Route::resource('results', 'ResultsController');
 
 
@@ -33,6 +35,8 @@ Route::group(array('before' => 'auth'), function(){
 		
 	});
 
+
+	Route::get('/list-of-participants/export', ['as' => 'admin.export', 'uses' => 'AdminController@export']);
 
 	Route::get('/list-of-participants', [
 		'as' => 'dashboard',

@@ -1,4 +1,5 @@
 <?php
+use BCD\ExportToExcel;
 use BCD\Registrations\RegistrationRepository;
 use BCD\Participants\ParticipantRepository;
 
@@ -34,9 +35,11 @@ class AdminController extends \BaseController {
 	public function index()
 	{
 		$participants = $this->participants->getAllParticipants();
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
 
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'All'], compact('participants', 'currentRow'));
+		return View::make('admin.participants-list', ['pageTitle' => 'All'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
 	}
 
 	/**
@@ -47,8 +50,10 @@ class AdminController extends \BaseController {
 	public function showKids()
 	{
 		$participants = $this->participants->getKidParticipants();
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Kids'], compact('participants', 'currentRow'));
+		return View::make('admin.participants-list', ['pageTitle' => 'Kids'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
 	}
 
 	/**
@@ -59,8 +64,10 @@ class AdminController extends \BaseController {
 	public function showTeens()
 	{
 		$participants = $this->participants->getTeenParticipants();
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Teens'], compact('participants', 'currentRow'));
+		return View::make('admin.participants-list', ['pageTitle' => 'Teens'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
 	}
 
 	/**
@@ -72,7 +79,9 @@ class AdminController extends \BaseController {
 	{
 		$participants = $this->participants->getAdultParticipants();
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Adults'], compact('participants', 'currentRow'));
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
+		return View::make('admin.participants-list', ['pageTitle' => 'Adults'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
 	}
 
 	/**
@@ -84,7 +93,23 @@ class AdminController extends \BaseController {
 	{
 		$participants = $this->participants->getSeniorParticipants();
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Seniors'], compact('participants', 'currentRow'));
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
+		return View::make('admin.participants-list', ['pageTitle' => 'Seniors'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
+	}
+
+	/**
+	* Export list of employees to Excel
+	*
+	* @return Excel
+	*/
+	public function export() 
+	{
+		$rejectReasons = $this->participants->getCSVReport();
+
+		$excel = new ExportToExcel($rejectReasons, 'List of Participants for Ms. Earth 2015');
+
+		return $excel->export();
 	}
 
 

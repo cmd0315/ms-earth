@@ -39,6 +39,9 @@
             </div>
             <div class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
+                @if($currentUser)
+                <li><h4>Welcome, Admin!<h4></li>
+                @endif
                 <li><a href="{{ URL::route('home') }}"><i class="fa fa-home fa-2x"></i></a></li>
                 @if($currentUser)
                 <li><a href="{{ URL::route('sessions.signout') }}"><i class="fa fa-sign-out fa-2x"></i></a></li>
