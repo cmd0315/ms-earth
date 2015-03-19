@@ -49,6 +49,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+    return Redirect::route('home');
 });
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
@@ -59,7 +60,6 @@ App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $excepti
     // Redirect to error route with any message
     return Response::view('errors.missing', ['pageTitle' => 'Page Not Found', 'currentUser' => ''], 404);
 });
-
 App::missing(function($exception)
 {
 	return Response::view('errors.missing', ['pageTitle' => 'Page Not Found', 'currentUser' => ''], 404);
