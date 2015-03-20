@@ -56,4 +56,14 @@ class RegistrationRepository {
 		return Registration::whereRegistrationID($registration_id)->firstOrFail();
 	}
 
+	/**
+	* Return race shirt sizes
+	*
+	* @return Array
+	*/
+	public function getRaceShirtSizes() {
+
+		return $race_shirt_sizes = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL'];
+	}
+
 }

@@ -56,7 +56,7 @@
 							  		<div class="col-lg-6">
 										<div class="form-group">
 											<label for="birthdate_1">Birth Date</label>
-											<input type="date" class="form-control" name="birthdate_1" id="birthdate_1"{{ (Input::old('birthdate_1')) ? ' value ="' . Input::old('birthdate_1') . '"' : '' }}>
+											<input type="text" class="form-control special-date" id="birthdate_1" name="birthdate_1"{{ (Input::old('birthdate_1')) ? ' value ="' . Input::old('birthdate_1') . '"' : '' }}>
 											@if($errors->has('birthdate_1'))
 												<p class="bg-danger">{{ $errors->first('birthdate_1') }}</p>
 											@endif
@@ -71,6 +71,17 @@
 											</select>
 											@if($errors->has('sex_1'))
 												<p class="bg-danger">{{ $errors->first('sex_1') }}</p>
+											@endif
+										</div>
+							  		</div>
+							  	</div><!--.row -->
+							  	<div class="row">
+							  		<div class="col-lg-6">
+										<div class="form-group">
+											<label for="race_shirt_size_1">Race Shirt Size</label>
+											{{ Form::select('race_shirt_size_1', ['' => 'SHIRT SIZE'] + $race_shirt_sizes, Input::old('race_shirt_size_1'), ['class' => 'form-control', 'id' => 'race_shirt_size_1']) }}
+											@if($errors->has('race_shirt_size_1'))
+												<p class="bg-danger">{{ $errors->first('race_shirt_size_1') }}</p>
 											@endif
 										</div>
 							  		</div>
@@ -121,7 +132,7 @@
 							  		<div class="col-lg-6">
 										<div class="form-group">
 											<label for="birthdate_2">Birth Date</label>
-											<input type="date" class="form-control" name="birthdate_2" id="birthdate_2"{{ (Input::old('birthdate_2')) ? ' value ="' . Input::old('birthdate_2') . '"' : '' }}>
+											<input type="text" class="form-control special-date" id="birthdate_2" name="birthdate_2"{{ (Input::old('birthdate_2')) ? ' value ="' . Input::old('birthdate_2') . '"' : '' }}>
 											@if($errors->has('birthdate_2'))
 												<p class="bg-danger">{{ $errors->first('birthdate_2') }}</p>
 											@endif
@@ -140,6 +151,17 @@
 										</div>
 							  		</div>
 							  	</div><!--.row -->
+							  	<div class="row">
+							  		<div class="col-lg-6">
+										<div class="form-group">
+											<label for="race_shirt_size_2">Race Shirt Size</label>
+											{{ Form::select('race_shirt_size_2', ['' => 'SHIRT SIZE'] + $race_shirt_sizes, Input::old('race_shirt_size_2'), ['class' => 'form-control', 'id' => 'race_shirt_size_2']) }}
+											@if($errors->has('race_shirt_size_2'))
+												<p class="bg-danger">{{ $errors->first('race_shirt_size_2') }}</p>
+											@endif
+										</div>
+							  		</div>
+							  	</div><!--.row -->
 				      		</div><!-- .panel-body -->
 				    	</div><!-- .panel-collapse -->
 				  	</div><!-- .panel -->
@@ -153,7 +175,6 @@
 										</a>
 									</div>
 									<div class="col-lg-2">
-										<button class="btn btn-primary btn-xs pull-right" id="add-more" type="submit">Add More</button>
 									</div>
 								</div>
 							</h4>
@@ -193,7 +214,7 @@
 							  		<div class="col-lg-6">
 										<div class="form-group">
 											<label for="birthdate_3">Birth Date</label>
-											<input type="date" class="form-control" name="birthdate_3" id="birthdate_3"{{ (Input::old('birthdate_3')) ? ' value ="' . Input::old('birthdate_3') . '"' : '' }}>
+											<input type="text" class="form-control special-date" id="birthdate_3" name="birthdate_3"{{ (Input::old('birthdate_3')) ? ' value ="' . Input::old('birthdate_3') . '"' : '' }}>
 											@if($errors->has('birthdate_3'))
 												<p class="bg-danger">{{ $errors->first('birthdate_3') }}</p>
 											@endif
@@ -208,6 +229,17 @@
 											</select>
 											@if($errors->has('sex_3'))
 												<p class="bg-danger">{{ $errors->first('sex_3') }}</p>
+											@endif
+										</div>
+							  		</div>
+							  	</div><!--.row -->
+							  	<div class="row">
+							  		<div class="col-lg-6">
+										<div class="form-group">
+											<label for="race_shirt_size_3">Race Shirt Size</label>
+											{{ Form::select('race_shirt_size_3', ['' => 'SHIRT SIZE'] + $race_shirt_sizes, Input::old('race_shirt_size_3'), ['class' => 'form-control', 'id' => 'race_shirt_size_3']) }}
+											@if($errors->has('race_shirt_size_3'))
+												<p class="bg-danger">{{ $errors->first('race_shirt_size_3') }}</p>
 											@endif
 										</div>
 							  		</div>

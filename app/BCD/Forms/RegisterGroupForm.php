@@ -16,16 +16,19 @@ class RegisterGroupForm extends FormValidator {
 		'last_name_1' => 'required|max:60|min:2',
 		'birthdate_1' => 'required|date',
 		'sex_1' => 'required',
+		'race_shirt_size_1' => 'required|max:5|min:1',
 		'first_name_2' => 'required|max:60|min:2',
 		'middle_name_2' => 'required|max:60|min:2',
 		'last_name_2' => 'required|max:60|min:2',
 		'birthdate_2' => 'required|date',
 		'sex_2' => 'required',
+		'race_shirt_size_2' => 'required|max:5|min:1',
 		'first_name_3' => 'required|max:60|min:2',
 		'middle_name_3' => 'required|max:60|min:2',
 		'last_name_3' => 'required|max:60|min:2',
 		'birthdate_3' => 'required|date',
-		'sex_3' => 'required'
+		'sex_3' => 'required',
+		'race_shirt_size_3' => 'required|max:5|min:1'
 
 	];
 

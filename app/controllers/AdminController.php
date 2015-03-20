@@ -47,41 +47,13 @@ class AdminController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function showKids()
+	public function showJuniors()
 	{
-		$participants = $this->participants->getKidParticipants();
+		$participants = $this->participants->getJuniorParticipants();
 		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
 		$femaleCount = (sizeof($participants)) - $maleCount;
 		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Kids'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function showTeens()
-	{
-		$participants = $this->participants->getTeenParticipants();
-		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
-		$femaleCount = (sizeof($participants)) - $maleCount;
-		$currentRow = 0;
-		return View::make('admin.participants-list', ['pageTitle' => 'Teens'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function showAdults()
-	{
-		$participants = $this->participants->getAdultParticipants();
-		$currentRow = 0;
-		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
-		$femaleCount = (sizeof($participants)) - $maleCount;
-		return View::make('admin.participants-list', ['pageTitle' => 'Adults'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
+		return View::make('admin.participants-list', ['pageTitle' => 'Juniors'], compact('participants', 'currentRow', 'maleCount', 'femaleCount'));
 	}
 
 	/**

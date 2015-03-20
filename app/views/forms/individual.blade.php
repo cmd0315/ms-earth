@@ -45,7 +45,8 @@
 			  		<div class="col-lg-6">
 						<div class="form-group">
 							<label for="birthdate">Birth Date</label>
-							<input type="date" class="form-control" name="birthdate" id="birthdate"{{ (Input::old('birthdate')) ? ' value ="' . Input::old('birthdate') . '"' : '' }}>
+							<input type="text" class="form-control special-date" id="birthdate" name="birthdate"{{ (Input::old('birthdate')) ? ' value ="' . Input::old('birthdate') . '"' : '' }}>
+							
 							@if($errors->has('birthdate'))
 								<p class="bg-danger">{{ $errors->first('birthdate') }}</p>
 							@endif
@@ -114,9 +115,22 @@
 			  		</div>
 			  	</div>
 			  	<div class="row">
+			  		<div class="col-lg-6">
+						<div class="form-group">
+							<label for="race_shirt_size">Race Shirt Size</label>
+							{{ Form::select('race_shirt_size', ['' => 'SHIRT SIZE'] + $race_shirt_sizes, Input::old('race_shirt_size'), ['class' => 'form-control', 'id' => 'race_shirt_size']) }}
+							@if($errors->has('race_shirt_size'))
+								<p class="bg-danger">{{ $errors->first('race_shirt_size') }}</p>
+							@endif
+						</div>
+			  		</div>
+			  	</div>
+			  	<div class="row">
 			  		<div class="col-lg-12">
-			  			<input type="hidden" name="registration_type" id="registration_type" value="0">
-			  			<button type="submit" class="btn btn-theme">Register</button>
+						<div class="form-group">
+				  			<input type="hidden" name="registration_type" id="registration_type" value="0">
+				  			<button type="submit" class="btn btn-theme">Register</button>
+				  		</div>
 			  		</div>
 			  	</div>
 			{{ Form::close() }}

@@ -5,14 +5,14 @@ class IndividualRegistrationCommand {
 	/**
 	* @var mixed
 	*/
-	public $registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number;
+	public $registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size;
 
 	/**
 	* Constructor
 	*
 	* @param mixed
 	*/
-	function __construct($registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number) 
+	function __construct($registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size) 
 	{
 		$this->registration_id = $registration_id;
 		$this->registration_type = $registration_type;
@@ -26,5 +26,6 @@ class IndividualRegistrationCommand {
 		$this->province = $province;
 		$this->email_address = $email_address;
 		$this->contact_number = $contact_number;
+		$this->race_shirt_size = $race_shirt_size;
 	}
 }

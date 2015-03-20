@@ -54,7 +54,7 @@ class AnotherPersonRegistrationCommandHandler implements CommandHandler {
 		// Create Participant object
 		$participant = Participant::register(
 			$command->registration_id, $command->first_name, $command->middle_name, $command->last_name,
-			$command->birthdate, $command->sex, $command->street, $command->city, $command->province, $command->email_address, $command->contact_number
+			$command->birthdate, $command->sex, $command->street, $command->city, $command->province, $command->email_address, $command->contact_number, $command->race_shirt_size
 		);
 
 		if($this->registrationRepository->save($registration) && $this->participantRepository->save($participant)) {

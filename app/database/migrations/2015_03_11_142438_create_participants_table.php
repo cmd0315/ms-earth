@@ -26,6 +26,7 @@ class CreateParticipantsTable extends Migration {
 			$table->string('province', 250);
 			$table->string('email_address', 50);
 			$table->string('contact_number', 20);
+			$table->string('race_shirt_size', 5);
 			$table->timestamps();
 			$table->softDeletes();
 		});

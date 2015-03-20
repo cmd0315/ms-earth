@@ -87,7 +87,8 @@ class AnotherPersonRegistrationController extends \BaseController {
 	public function createParticipantRegistration($contact_person_id)
 	{
 		$contact_person = $this->contact_persons->getPersonByID($contact_person_id);
-		return View::make('forms.another_person', ['pageTitle' => 'Register Another Person'], compact('contact_person'));
+		$race_shirt_sizes = $this->registrations->getRaceShirtSizes();
+		return View::make('forms.another_person', ['pageTitle' => 'Register Another Person'], compact('contact_person', 'race_shirt_sizes'));
 	}
 
 	/**
@@ -148,13 +149,13 @@ class AnotherPersonRegistrationController extends \BaseController {
 		}
 
 		// Extract post data
-		extract(Input::only('first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'registration_type'));
+		extract(Input::only('first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size', 'registration_type'));
 
 		$registration_id = $this->registrations->generateRegistrationID();
 
 		// Execute command to insert contact person data
 		$registration = $this->execute(
-			new AnotherPersonRegistrationCommand($registration_id, $registration_type, $contact_person_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number)
+			new AnotherPersonRegistrationCommand($registration_id, $registration_type, $contact_person_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size)
 		);
 
 		/** 

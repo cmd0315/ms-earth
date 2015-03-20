@@ -62,3 +62,7 @@ li.list-group-item:hover, li.list-group-item:hover a {
     font-size: 14px;
     line-height: 16px;
 }
+
+.datepicker.dropdown-menu {
+    background-color: #fff;
+}

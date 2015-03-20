@@ -24,7 +24,7 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number'];
+	protected $fillable = ['id', 'registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size'];
 
 	 /**
     * Required for softdeletion of records
@@ -49,8 +49,8 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     * @param String
     * @return Participant
     */
-    public static function register($registration_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number) {
-        $participant = new static(compact('registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number'));
+    public static function register($registration_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size) {
+        $participant = new static(compact('registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size'));
  
         return $participant;
 
@@ -76,14 +76,8 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     public function getCategoryAttribute() {
         $category = 'Seniors';
 
-        if($this->age <= 12) {
-            $category = 'Kids';
-        }
-        else if($this->age > 12 && $this->age <= 21) {
-            $category = "Teens";
-        }
-        else if($this->age > 21 && $this->age <= 59) {
-            $category = 'Adults';
+        if($this->age <= 39) {
+            $category = 'Juniors';
         }
         else {
             $category = $category;

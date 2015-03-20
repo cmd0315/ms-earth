@@ -20,7 +20,8 @@ class RegisterParticipantForm extends FormValidator {
 		'city' => 'required|max:250|min:2',
 		'province' => 'required|max:250|min:2',
 		'email_address' => 'required|max:50|email|unique:participants',
-		'contact_number' => 'required|max:20|min:11'
+		'contact_number' => 'required|max:20|min:11',
+		'race_shirt_size' => 'required|max:5|min:1'
 	];
 
 } 

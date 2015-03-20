@@ -43,15 +43,15 @@
                           Pastor Village, Gulod, Labac, Batangas City
                         </p>
                     </div>
-                </div><! --/row -->
+                </div><!-- /row  -->
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
                         <p>&copy; 2015 Miss Earth</p>
                     </div>
-                </div><! --/row -->
-            </div><! --/container -->
-        </div><! --/footerwrap -->
+                </div><!--/row -->
+            </div><!--/container -->
+        </div><!--/footerwrap -->
 
         {{ HTML::script('js/jquery-1.10.2.min.js') }}
         {{ HTML::script('js/bootstrap.min.js') }}
@@ -60,6 +60,7 @@
         {{ HTML::script('js/jquery.hoverex.min.js') }}
         {{ HTML::script('js/jquery.prettyPhoto.js') }}
         {{ HTML::script('js/jquery.isotope.min.js') }}
+        {{ HTML::script('js/bootstrap-datepicker.js') }}
         {{ HTML::script('js/scripts.js') }}
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     </body>

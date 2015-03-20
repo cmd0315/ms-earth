@@ -17,6 +17,7 @@
 						<th>Name</th>
 						<th>Race Category</th>
 						<th>Race Segment</th>
+						<th>Race Shirt Size</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,6 +26,7 @@
 						<td>{{ $participant->name }}</td>
 						<td>{{ $participant->category }}</td>
 						<td>{{ $participant->segment }}</td>
+						<td>{{ $participant->race_shirt_size }}</td>
 					</tr>
 					@endforeach
 				</tbody>

@@ -49,7 +49,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
-    return Redirect::route('home');
+   // return Redirect::route('home');
 });
 
 App::error(function(Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
@@ -64,6 +64,7 @@ App::missing(function($exception)
 {
 	return Response::view('errors.missing', ['pageTitle' => 'Page Not Found', 'currentUser' => ''], 404);
 });
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

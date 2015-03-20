@@ -60,7 +60,8 @@ class IndividualRegistrationController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('forms.individual', ['pageTitle' => 'Individual Registration']);
+		$race_shirt_sizes = $this->registrations->getRaceShirtSizes();
+		return View::make('forms.individual', ['pageTitle' => 'Individual Registration'], compact('race_shirt_sizes'));
 	}
 
 
@@ -80,13 +81,13 @@ class IndividualRegistrationController extends \BaseController {
 		}
 
 		// Extract post data
-		extract(Input::only('first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'registration_type'));
+		extract(Input::only('first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size', 'registration_type'));
 
 		$registration_id = $this->registrations->generateRegistrationID();
 
 		// Execute command to insert participant data
 		$registration = $this->execute(
-			new IndividualRegistrationCommand($registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number)
+			new IndividualRegistrationCommand($registration_id, $registration_type, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size)
 		);
 
 		/** 

@@ -32,4 +32,10 @@ jQuery(document).ready(function($){
 		  }
 		});
 	});
+
+	/*Change Date Markup*/
+	$('.special-date').datepicker({
+		format: 'yyyy-mm-dd' ,
+		viewMode: 2
+	});
 });

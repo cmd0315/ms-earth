@@ -43,20 +43,11 @@ Route::group(array('before' => 'auth'), function(){
 		'uses' => 'AdminController@index'
 	]);
 
-	Route::get('/list-of-participants/kids', [
-		'as' => 'admin.showKids',
-		'uses' => 'AdminController@showKids'
+	Route::get('/list-of-participants/juniors', [
+		'as' => 'admin.showJuniors',
+		'uses' => 'AdminController@showJuniors'
 	]);
 
-	Route::get('/list-of-participants/teens', [
-		'as' => 'admin.showTeens',
-		'uses' => 'AdminController@showTeens'
-	]);
-
-	Route::get('/list-of-participants/adults', [
-		'as' => 'admin.showAdults',
-		'uses' => 'AdminController@showAdults'
-	]);
 
 	Route::get('/list-of-participants/seniors', [
 		'as' => 'admin.showSeniors',

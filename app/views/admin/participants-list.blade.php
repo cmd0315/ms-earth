@@ -10,10 +10,8 @@
 		<div class="col-lg-2">
 			<ul class="list-group">
 				<li class="list-group-item"><a href="{{ URL::route('dashboard') }}">All</a></li>
-				<li class="list-group-item"><a href="{{ URL::route('admin.showKids') }}">Kids (12 - below)</a></li>
-				<li class="list-group-item"><a href="{{ URL::route('admin.showTeens') }}">Teens (13 - 21)</a></li>
-				<li class="list-group-item"><a href="{{ URL::route('admin.showAdults') }}">Adults (22 - 59)</a></li>
-				<li class="list-group-item"><a href="{{ URL::route('admin.showSeniors') }}">Seniors (60 - above)</a></li>
+				<li class="list-group-item"><a href="{{ URL::route('admin.showJuniors') }}">Juniors (39 - below)</a></li>
+				<li class="list-group-item"><a href="{{ URL::route('admin.showSeniors') }}">Seniors (40 - above)</a></li>
 			</ul>
 			<button type="button" id="{{ URL::route('admin.export') }}" class="btn btn-theme btn-sm export">Export Participants</button>
 		</div>

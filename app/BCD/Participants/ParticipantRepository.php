@@ -28,40 +28,16 @@ class ParticipantRepository {
 		return Participant::withTrashed()->where('registration_id', '!=', '')->orderBy('created_at', 'ASC')->get();
 	}
 
-	public function getKidParticipants() {
+	public function getJuniorParticipants() {
 		$kids = [];
 
 		foreach($this->getAllParticipants() as $participant) {
-			if(strcasecmp($participant->category, 'Kids') === 0) {
+			if(strcasecmp($participant->category, 'Juniors') === 0) {
 				array_push($kids, $participant);
 			}
 		}
 
 		return $kids;
-	}
-
-	public function getTeenParticipants() {
-		$teens = [];
-
-		foreach($this->getAllParticipants() as $participant) {
-			if(strcasecmp($participant->category, 'Teens') === 0) {
-				array_push($teens, $participant);
-			}
-		}
-
-		return $teens;
-	}
-
-	public function getAdultParticipants() {
-		$adults = [];
-
-		foreach($this->getAllParticipants() as $participant) {
-			if(strcasecmp($participant->category, 'Adults') === 0) {
-				array_push($adults, $participant);
-			}
-		}
-
-		return $adults;
 	}
 
 	public function getSeniorParticipants() {

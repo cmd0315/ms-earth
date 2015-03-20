@@ -64,17 +64,17 @@ class GroupRegistrationCommandHandler implements CommandHandler {
 		// Create Participant objects
 		$participant_1 = Participant::register(
 			$command->registration_id, $command->first_name_1, $command->middle_name_1, $command->last_name_1,
-			$command->birthdate_1, $command->sex_1, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number
+			$command->birthdate_1, $command->sex_1, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number, $command->race_shirt_size_1
 		);
 
 		$participant_2 = Participant::register(
 			$command->registration_id, $command->first_name_2, $command->middle_name_2, $command->last_name_2,
-			$command->birthdate_2, $command->sex_2, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number
+			$command->birthdate_2, $command->sex_2, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number, $command->race_shirt_size_2
 		);
 
 		$participant_3 = Participant::register(
 			$command->registration_id, $command->first_name_3, $command->middle_name_3, $command->last_name_3,
-			$command->birthdate_3, $command->sex_3, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number
+			$command->birthdate_3, $command->sex_3, $contactPerson->street, $contactPerson->city, $contactPerson->province, $contactPerson->email_address, $contactPerson->contact_number, $command->race_shirt_size_3
 		);
 
 

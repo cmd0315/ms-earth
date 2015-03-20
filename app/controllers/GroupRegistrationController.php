@@ -86,7 +86,8 @@ class GroupRegistrationController extends \BaseController {
 	public function createParticipantsRegistration($contact_person_id)
 	{
 		$contact_person = $this->contact_persons->getPersonByID($contact_person_id);
-		return View::make('forms.group', ['pageTitle' => 'Register Group'], compact('contact_person'));
+		$race_shirt_sizes = $this->registrations->getRaceShirtSizes();
+		return View::make('forms.group', ['pageTitle' => 'Register Group'], compact('contact_person', 'race_shirt_sizes'));
 	}
 
 
@@ -147,14 +148,14 @@ class GroupRegistrationController extends \BaseController {
 		}
 
 		// Extract post data
-		extract(Input::only('first_name_1', 'middle_name_1', 'last_name_1','birthdate_1', 'sex_1', 'first_name_2', 'middle_name_2', 'last_name_2', 'birthdate_2', 'sex_2', 'first_name_3', 'middle_name_3', 'last_name_3', 'birthdate_3', 'sex_3', 'registration_type'));
+		extract(Input::only('first_name_1', 'middle_name_1', 'last_name_1','birthdate_1', 'sex_1', 'race_shirt_size_1', 'first_name_2', 'middle_name_2', 'last_name_2', 'birthdate_2', 'sex_2', 'race_shirt_size_2', 'first_name_3', 'middle_name_3', 'last_name_3', 'birthdate_3', 'sex_3', 'race_shirt_size_3', 'registration_type'));
 
 		$registration_id = $this->registrations->generateRegistrationID();
 
 
 		// Execute command to insert contact person data
 		$registration = $this->execute(
-			new GroupRegistrationCommand($registration_id, $registration_type, $contact_person_id, $first_name_1, $middle_name_1, $last_name_1, $birthdate_1, $sex_1, $first_name_2, $middle_name_2, $last_name_2, $birthdate_2, $sex_2, $first_name_3, $middle_name_3, $last_name_3, $birthdate_3, $sex_3)
+			new GroupRegistrationCommand($registration_id, $registration_type, $contact_person_id, $first_name_1, $middle_name_1, $last_name_1, $birthdate_1, $sex_1, $race_shirt_size_1, $first_name_2, $middle_name_2, $last_name_2, $birthdate_2, $sex_2, $race_shirt_size_2, $first_name_3, $middle_name_3, $last_name_3, $birthdate_3, $sex_3, $race_shirt_size_3)
 		);
 
 		/** 
