@@ -56,7 +56,7 @@ class ParticipantRepository {
 		$males = [];
 
 		foreach($participants as $participant) {
-			if($participant->sex == 0) {
+			if($participant->gender == 0) {
 				array_push($males, $participant);
 			}
 		}
@@ -68,7 +68,7 @@ class ParticipantRepository {
 		$females = [];
 
 		foreach($participants as $participant) {
-			if($participant->sex > 0) {
+			if($participant->gender > 0) {
 				array_push($females, $participant);
 			}
 		}

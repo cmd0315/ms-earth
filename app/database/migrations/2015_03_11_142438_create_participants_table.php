@@ -16,17 +16,16 @@ class CreateParticipantsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('registration_id', 100);
-			$table->string('first_name', 60);
-			$table->string('middle_name', 60);
-			$table->string('last_name', 60);
+			$table->string('first_name', 250);
+			$table->string('last_name', 250);
 			$table->date('birthdate');
-			$table->integer('sex');
-			$table->string('street', 250);
-			$table->string('city', 250);
-			$table->string('province', 250);
+			$table->integer('gender');
+			$table->string('complete_address_1', 250);
+			$table->string('complete_address_2', 250)->nullable();
 			$table->string('email_address', 50);
 			$table->string('contact_number', 20);
 			$table->string('race_shirt_size', 5);
+			$table->integer('contact_person_status')->default(1);
 			$table->timestamps();
 			$table->softDeletes();
 		});

@@ -66,4 +66,14 @@ class RegistrationRepository {
 		return $race_shirt_sizes = ['S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL'];
 	}
 
+	/**
+	* Return genders/sexes
+	*
+	* @return Array
+	*/
+	public function getGenders() {
+
+		return $genders = ['0' => 'Male', '1' => 'Female'];
+	}
+
 }

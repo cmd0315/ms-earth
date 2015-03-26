@@ -16,8 +16,6 @@ class CreateRegistrationsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('registration_id', 100)->unique();
-			$table->integer('registration_type')->default(0);
-			$table->string('contact_person_id', 100)->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 		});

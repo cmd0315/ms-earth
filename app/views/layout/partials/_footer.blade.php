@@ -21,33 +21,8 @@
         <div id="footerwrap">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <h4>About</h4>
-                        <div class="hline-w"></div>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4>Social Links</h4>
-                        <div class="hline-w"></div>
-                        <p>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </p>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4>Location</h4>
-                        <div class="hline-w"></div>
-                        <p>Pontefino</p>
-                        <p>
-                          Pastor Village, Gulod, Labac, Batangas City
-                        </p>
-                    </div>
-                </div><!-- /row  -->
-                <br>
-                <div class="row">
                     <div class="col-lg-12">
-                        <p>&copy; 2015 Miss Earth</p>
+                        <p>&copy; 2015 Run for Earth with Miss Philippines Earth</p>
                     </div>
                 </div><!--/row -->
             </div><!--/container -->

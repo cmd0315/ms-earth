@@ -24,7 +24,7 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'registration_id', 'registration_type', 'contact_person_id'];
+	protected $fillable = ['id', 'registration_id'];
 
 	 /**
     * Required for softdeletion of records
@@ -43,24 +43,14 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         return $this->hasMany('BCD\Participants\Participant', 'registration_id', 'registration_id');
     }
 
-     /**
-     * Specify the kind of relationship between the registration and contact person model from the perspective of the registration model
-     *
-     * @return dependency between the two models
-     */
-    public function contactPerson()
-    {
-        return $this->hasOne('BCD\ContactPersons\ContactPerson', 'contact_person_id', 'contact_person_id');
-    }
-
     /**
     * Add registration entry
     *
-    * @param String
+    * @param String $registration_id
     * @return Registration
     */
-    public static function addIndividual($registration_id, $registration_type) {
-        $registration = new static(compact('registration_id', 'registration_type'));
+    public static function addRegistration($registration_id) {
+        $registration = new static(compact('registration_id'));
  
         return $registration;
 
@@ -84,7 +74,7 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
     /**
     * Return re-structured registration type
     *
-    * @return Registration
+    * @return String
     */
     public function getRegTypeAttribute() {
         $reg_type = 'Individual';
@@ -100,6 +90,22 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         }
 
         return $reg_type;
+    }
+
+    /**
+    * Return date registered
+    *
+    * @return String
+    */
+   public function getDateRegisteredAttribute() {
+        $year = date('Y', strtotime($this->created_at));
+        $month = date('m', strtotime($this->created_at));
+        $day = date('j', strtotime($this->created_at));
+        $hr = date('g', strtotime($this->created_at));
+        $min = date('i', strtotime($this->created_at));
+        $sec = date('s', strtotime($this->created_at));
+        
+        return Carbon::create($year, $month, $day, $hr, $min, $sec)->diffForHumans();
     }
 
 }

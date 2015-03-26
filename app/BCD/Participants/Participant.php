@@ -24,7 +24,7 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['id', 'registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size'];
+	protected $fillable = ['id', 'registration_id', 'first_name', 'last_name', 'birthdate', 'gender', 'complete_address_1', 'complete_address_2', 'email_address', 'contact_number', 'race_shirt_size', 'contact_person_status'];
 
 	 /**
     * Required for softdeletion of records
@@ -49,8 +49,8 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     * @param String
     * @return Participant
     */
-    public static function register($registration_id, $first_name, $middle_name, $last_name, $birthdate, $sex, $street, $city, $province, $email_address, $contact_number, $race_shirt_size) {
-        $participant = new static(compact('registration_id', 'first_name', 'middle_name', 'last_name', 'birthdate', 'sex', 'street', 'city', 'province', 'email_address', 'contact_number', 'race_shirt_size'));
+    public static function register($registration_id, $first_name, $last_name, $birthdate, $gender, $complete_address_1, $complete_address_2, $email_address, $contact_number, $race_shirt_size, $contact_person_status) {
+        $participant = new static(compact('registration_id', 'first_name', 'last_name', 'birthdate', 'gender', 'complete_address_1', 'complete_address_2', 'email_address', 'contact_number', 'race_shirt_size', 'contact_person_status'));
  
         return $participant;
 
@@ -94,7 +94,7 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     public function getSegmentAttribute() {
         $segment = 'Male';
 
-        if($this->sex > 0) {
+        if($this->gender > 0) {
             $segment = 'Female';
         }
         else {
@@ -105,21 +105,28 @@ class Participant extends Eloquent implements UserInterface, RemindableInterface
     }
 
     /**
-    * Return concatenated first, middle, and last names of Participant
+    * Return concatenated first, and last names of Participant
     *
     * @return String
     */
     public function getNameAttribute() {
-        return $name = ucfirst($this->first_name) . ' ' . ucfirst($this->middle_name) . ' ' . ucfirst($this->last_name);
+        return $name = ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
     /**
-    * Return concatenated first, middle, and last names of Participant
-    *
+    * Return concatenated addresses
     * @return String 
     */
     public function getAddressAttribute() {
-        return $address = ucfirst($this->street) . ', ' . ucfirst($this->city) . ', ' . ucfirst($this->province);
+        $address = '';
+
+        if($this->complete_address_2) {
+            $address = ucfirst($this->complete_address_1) . ', ' . ucfirst($this->complete_address_2);
+        }
+        else {
+            $address = ucfirst($this->complete_address_1);
+        }
+        return $address;
     }
 
 }

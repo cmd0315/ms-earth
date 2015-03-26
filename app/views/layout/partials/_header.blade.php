@@ -6,11 +6,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{ isset($pageTitle) ? $pageTitle : '' }} | Ms. Earth 2015 Fun Run Registration</title>
+        <title>{{ isset($pageTitle) ? $pageTitle : '' }} | Run for Earth with Miss Philippines Earth</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
         {{ HTML::style('css/bootstrap.min.css') }}
         {{ HTML::style('css/datepicker.css') }}
@@ -26,7 +25,6 @@
 
         <!-- Add your site or application content here -->
 
-        <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
@@ -36,22 +34,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ URL::route('home') }}">MS. EARTH 2015</a>
+              <a class="logo" href="{{ URL::route('home') }}"><img src="{{asset('images/pontefino-logo.png')}}" title="Pontefino Logo" alt="Pontefino Logo"></a>
             </div>
             <div class="navbar-collapse collapse navbar-right">
               <ul class="nav navbar-nav">
                 @if($currentUser)
                 <li><h4>Welcome, Admin!<h4></li>
-                <li><a href="{{ URL::route('dashboard') }}"><i class="fa fa-home fa-2x"></i></a></li>
+                <li><a href="{{ URL::route('dashboard') }}">Home</a></li>
+                <li><a href="{{URL::route('sessions.signout')}}">Logout</a></li>
                 @else
-                <li><a href="{{ URL::route('home') }}"><i class="fa fa-home fa-2x"></i></a></li>
-                @endif
-                @if($currentUser)
-                <li><a href="{{ URL::route('sessions.signout') }}"><i class="fa fa-sign-out fa-2x"></i></a></li>
-                @else
-                <li><a href="{{ URL::route('sessions.create') }}">ADMIN</a></li>
+                <li><a href="{{URL::route('home') . '#headerwrap'}}">Home</a></li>
+                <li><a href="{{URL::route('home') . '#headerwrap'}}">Run Information</a></li>
+                <li><a href="{{URL::route('home') . '#sign-up'}}">Registration</a></li>
+                <li><a href="{{URL::route('home') . '#contact-us'}}">Contact Us</a></li>
                 @endif
               </ul>
             </div><!--/.nav-collapse -->
           </div>
-        </div>
+        </div><!-- .navbar -->
