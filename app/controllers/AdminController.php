@@ -71,6 +71,21 @@ class AdminController extends \BaseController {
 	}
 
 	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function showContactPersons()
+	{
+		$participants = $this->participants->getAllContactPersons();
+		$currentRow = 0;
+		$maleCount = sizeof($this->participants->getMaleParticipants($participants));
+		$femaleCount = (sizeof($participants)) - $maleCount;
+		$contactPerson = 0;
+		return View::make('admin.participants-list', ['pageTitle' => 'Seniors'], compact('participants', 'currentRow', 'maleCount', 'femaleCount', 'contactPerson'));
+	}
+
+	/**
 	* Export list of employees to Excel
 	*
 	* @return Excel

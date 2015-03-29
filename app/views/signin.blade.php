@@ -1,7 +1,7 @@
 @extends('layout.master')
 
 @section('content')
-<div class="section home" id="headerwrap">
+<div class="section home">
     <div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
@@ -23,7 +23,7 @@
 									<p class="bg-danger">{{ $errors->first('password') }}</p>
 								@endif
 							</div>
-							<button type="submit" class="btn btn-theme">Submit</button>
+							<button type="submit" class="btn btn-theme pull-right">Submit</button>
 						{{ Form::close() }}
 					</div><!-- .panel-body -->
 				</div><!-- .panel -->

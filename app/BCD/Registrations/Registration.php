@@ -57,19 +57,6 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         //raise an event
     }
 
-    /**
-    * Add registration entry for another person
-    *
-    * @param String
-    * @return Registration
-    */
-    public static function addAnotherPerson($registration_id, $registration_type, $contact_person_id) {
-        $registration = new static(compact('registration_id', 'registration_type', 'contact_person_id'));
- 
-        return $registration;
-
-        //raise an event
-    }
 
     /**
     * Return re-structured registration type
@@ -105,7 +92,7 @@ class Registration extends Eloquent implements UserInterface, RemindableInterfac
         $min = date('i', strtotime($this->created_at));
         $sec = date('s', strtotime($this->created_at));
         
-        return Carbon::create($year, $month, $day, $hr, $min, $sec)->diffForHumans();
+        return Carbon::create($year, $month, $day, $hr, $min, $sec)->toCookieString();
     }
 
 }

@@ -1,6 +1,7 @@
 <?php namespace BCD\Mailers;
 
 use BCD\Registrations\RegistrationRepository;
+use BCD\Participants\ParticipantRepository;
 
 use View, PDF;
 class UserMailer extends Mailer {
@@ -8,50 +9,47 @@ class UserMailer extends Mailer {
 	/**
 	* @var RegistrationRepository $registrations
 	*/
-
 	protected $registrations;
+
+	/**
+	* @var ParticipantRepository $participants
+	*/
+	protected $participants;
 
 
 	/**
 	* Constructor
 	*
 	* @var RegistrationRepository $registrations
+	* @var ParticipantRepository $participants
 	*/
-	function __construct(RegistrationRepository $registrations) {
+	function __construct(RegistrationRepository $registrations, ParticipantRepository $participants) {
 		$this->registrations = $registrations;
+		$this->participants = $participants;
 	}
 
 
 	
 	/**
-	* Get Email Recipient
+	* Get Registration Information
 	*
 	* @var String $registration_id
 	* @return Registration
 	*/
 	public function getRegistrationInfo($registration_id) {
-		$registration = $this->registrations->getRegistrationByRegID($registration_id);
+		return $registration = $this->registrations->getRegistrationByRegID($registration_id);
 
-		return $registration;
 	}
 
 	/**
 	* Get Email Recipient
 	*
 	* @var Registration $registration
-	* @return Participant or ContactPerson
+	* @return Participant
 	*/
-	public function getRecipient($registration) {
-		$contact_person = $registration->contact_person;
+	public function getRecipient($registration_id) {
+		return $contact_person = $this->participants->getContactPerson($registration_id);
 
-		if($contact_person) {
-			return $recipient = $contact_person;
-		}
-		else {
-			$recipients = $registration->participants;
-
-			return $recipient = $recipients[0];
-		}
 	}
 
 
@@ -83,15 +81,14 @@ class UserMailer extends Mailer {
 
 		$registration = $this->getRegistrationInfo($registration_id);
 
-		$recipient = $this->getRecipient($registration);
+		$recipient = $this->getRecipient($registration_id);
 		$recipientEmailAddress = $recipient->email_address;
-		// $recipientEmail = 'charissedalida@gmail.com';
 		$recipientName = $recipient->name;
 
 		$attachment = $this->getPDFAttachment($registration, $recipientName);
 		$attachmentName = "Waiver Form.pdf";
 
-		$this->sendTo($recipientEmailAddress, $recipientName, $subject, $view, compact('recipientName', 'registration'), $attachment, $attachmentName);
+		return $this->sendTo($recipientEmailAddress, $recipientName, $subject, $view, compact('recipientName', 'registration'), $attachment, $attachmentName);
 
 	}
 }

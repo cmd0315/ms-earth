@@ -3,7 +3,12 @@ jQuery(document).ready(function($){
 	screenHeight = $( window ).height();
 	menuHeight = $('.navbar').height();
 	$('.home').css('margin-top', menuHeight);
-	$('.section').css('minHeight', (screenHeight-menuHeight)+10);
+	$('.section').css('minHeight', screenHeight);
+
+	/**
+	* DataTable for list of participants
+	*/
+	$('#participants-table').DataTable();
 
 	
 	/*
@@ -43,7 +48,6 @@ jQuery(document).ready(function($){
 
 	/*For Scrolling in About page*/
 	 //smoothscroll
-	totalHeaderHeight = screenHeight + menuHeight;
     $('a[href^="#"]').on('click', function (e) {
         e.preventDefault();
         $(document).off("scroll");
@@ -56,7 +60,7 @@ jQuery(document).ready(function($){
         var target = this.hash,
             menu = target;
         $target = $(target);
-        var scrollTarget = ($target.offset().top+2) - (totalHeaderHeight);
+        var scrollTarget = ($target.offset().top) - (menuHeight);
         $('html, body').stop().animate({
             'scrollTop': scrollTarget
         }, 500, 'swing', function () {
@@ -67,7 +71,14 @@ jQuery(document).ready(function($){
 
 	jQuery(document).on("scroll", onScroll);
 
-	//Add more participants
+	//Go to sign-up section
+	$("#register-now").click(function() {
+	    var offset = menuHeight; 
+
+	    $('html, body').animate({
+	        scrollTop: $("#sign-up").offset().top - offset
+	    }, 2000);
+	});
 	
 
 });
@@ -94,14 +105,12 @@ function removeField() {
 
 function onScroll(event){
     var scrollPos = jQuery(document).scrollTop();
-	var screenHeight = $( window ).height();
 	var menuHeight = $('.navbar').height();
-	var totalAdditionalHeight = headerHeight + menuHeight;
 
     jQuery('.navbar-collapse a').each(function () {
         var currLink = jQuery(this);
         var refElement = jQuery(currLink.attr("href"));
-        if (((refElement.position().top) - totalAdditionalHeight) <= scrollPos && ((refElement.position().top + refElement.height()) - totalAdditionalHeight) > scrollPos) {
+        if (((refElement.position().top) - menuHeight) <= scrollPos && ((refElement.position().top + refElement.height()) - menuHeight) > scrollPos) {
             jQuery('.navbar-collapse li a').removeClass("active");
             currLink.addClass("active");
         }

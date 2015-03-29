@@ -86,10 +86,10 @@ class SignUpCommandHandler implements CommandHandler {
 		}
 
 
-		// if($registrationSave && $participantSave) {
-		// 	// Send e-mail confirmation
-		// 	$mailUser = $this->mailer->confirmRegistration($command->registration_id);
-		// }
+		if($registrationSave && $participantSave) {
+			// Send e-mail confirmation
+			$mailUser = $this->mailer->confirmRegistration($command->registration_id);
+		}
 
 		return $participantSave;
 	}

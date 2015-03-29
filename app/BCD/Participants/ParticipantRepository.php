@@ -76,6 +76,34 @@ class ParticipantRepository {
 		return $females;
 	}
 
+	/**
+	* Return participant with contact person status given the registration ID
+	*
+	* @param String
+	* @return Participant
+	*/
+	public function getContactPerson($registration_id) {
+		return Participant::whereRegistrationID($registration_id)->where('contact_person_status', '0')->firstOrFail();
+	}
+
+	/**
+	* Return all participants with contact person status
+	*
+	* @return Participant
+	*/
+	public function getAllContactPersons() {
+		return Participant::where('contact_person_status', '0')->orderBy('created_at', 'ASC')->get();
+	}
+
+	/**
+	* Return all members of contact person
+	*
+	* @return Participant
+	*/
+	public function getMembers($registration_id) {
+		return Participant::whereRegistrationID($registration_id)->orderBy('created_at', 'ASC')->get();
+	}
+
 
 	/**
 	* Return formatted results of table rows, to be used for exporting to excel

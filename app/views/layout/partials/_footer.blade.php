@@ -36,6 +36,7 @@
         {{ HTML::script('js/jquery.prettyPhoto.js') }}
         {{ HTML::script('js/jquery.isotope.min.js') }}
         {{ HTML::script('js/bootstrap-datepicker.js') }}
+        {{ HTML::script('js/jquery.dataTables.js') }}
         {{ HTML::script('js/scripts.js') }}
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     </body>

@@ -16,7 +16,7 @@
 						<h5>Participant/s:</h5>
 					</div>
 					<div class="col-lg-6">
-						<h5 class="pull-right">Date Registered: {{ e($registration->date_registered) }}</h5>
+						<h5 class="pull-right">Date Registered: <span class="text-info">{{ e($registration->date_registered) }}</span></h5>
 					</div>
 				</div>
 				<div class="row">

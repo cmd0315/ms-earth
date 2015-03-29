@@ -10,7 +10,6 @@ class SignUpForm extends FormValidator {
 	 * @var array
 	 */
 	protected $rules = [
-		'registration_type' => 'required',
 		'first_name' => 'required|min:2',
 		'last_name' => 'required|min:2',
 		'birthdate' => 'required|date',

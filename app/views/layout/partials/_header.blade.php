@@ -15,6 +15,7 @@
         {{ HTML::style('css/datepicker.css') }}
         {{ HTML::style('css/style.css') }}
         {{ HTML::style('css/font-awesome.min.css') }}
+        {{ HTML::style('css/jquery.dataTables.css') }}
     </head>
 
 

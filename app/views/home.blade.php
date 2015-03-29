@@ -13,7 +13,7 @@
 					<p class="first">A 3K run alongside the candidates of Miss Philippines Earth 2015 to aid the Calumpang River Rehabilitation</p>
 					<h4>APRIL 25, 2015 | Assembly time: 5:00AM | SM City Batangas Parking Grounds</h4>
 					<p>Registration fee: Php500 inclusive of race kit with shirt</p>
-					<a href="#" class="btn btn-theme-info">Register now!</a>
+					<button id="register-now" class="btn btn-theme-info">Register now!</button>
 				</div>
 			</div>
 		</div><!-- /row -->
@@ -27,6 +27,12 @@
 				<span class="decor"></span>
 				<div class="description">
 					<p>Vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
+					@if($errors->count() > 0)
+						<div class="alert alert-danger alert-dismissible fade in" role="alert">
+					      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+					      <p><i class="fa fa-warning"></i>  Error submitting the form. Please check the fields below.</p>
+					    </div>
+					@endif
 				</div>
 				<div class="form">
 					{{ Form::open(['role' => 'form', 'route' => ['home.store']]) }}
@@ -194,7 +200,6 @@
 					  	<div class="row">
 					  		<div class="col-lg-12">
 								<div class="form-group">
-						  			<input type="hidden" name="registration_type" id="registration_type" value="0">
 						  			<button type="submit" class="btn btn-theme pull-right">Submit</button>
 						  		</div>
 					  		</div>

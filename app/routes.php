@@ -22,6 +22,10 @@ Route::group(array('before' => 'auth'), function(){
 		
 	});
 
+	Route::get('/contact-person/{registrationID}', [
+		'as' => 'contact_person.show',
+		'uses' => 'ContactPersonController@show'
+	]);
 
 	Route::get('/list-of-participants/export', ['as' => 'admin.export', 'uses' => 'AdminController@export']);
 
@@ -39,6 +43,11 @@ Route::group(array('before' => 'auth'), function(){
 	Route::get('/list-of-participants/seniors', [
 		'as' => 'admin.showSeniors',
 		'uses' => 'AdminController@showSeniors'
+	]);
+
+	Route::get('/list-of-participants/contact_persons', [
+		'as' => 'admin.showContactPersons',
+		'uses' => 'AdminController@showContactPersons'
 	]);
 
 	/*  Sign out (GET) */

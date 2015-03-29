@@ -1,45 +1,33 @@
 <?php
-use BCD\ContactPersons\ContactPersonRepository;
+use BCD\Participants\ParticipantRepository;
 
 class ContactPersonController extends \BaseController {
 
 	/**
-	* @var ContactPersonRepository $contactPersonRepository
+	* @var ParticipantRepository $participantRepository
 	*/
 
 	/**
 	* Constructor
 	*
-	* @param ContactPersonRepository $contactPersonRepository
+	* @param ParticipantRepository $participantRepository
 	*/
-	function __construct(ContactPersonRepository $contactPersonRepository) {
-		$this->contactPersonRepository = $contactPersonRepository;
-		$this->beforeFilter('auth');
+	function __construct(ParticipantRepository $participantRepository) {
+		$this->participantRepository = $participantRepository;
 	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
 
 
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  String  $contact_person_id
+	 * @param  String  $registration_id
 	 * @return Response
 	 */
-	public function show($contact_person_id)
+	public function show($registration_id)
 	{
-		$contact_person = $this->contactPersonRepository->getPersonByID($contact_person_id);
-
-		return View::make('admin.contact-person-profile', ['pageTitle' => 'Contact Person Information'], compact('contact_person'));
+		$contact_person = $this->participantRepository->getContactPerson($registration_id);
+		$members = $this->participantRepository->getMembers($registration_id);
+		return View::make('admin.contact-person-profile', ['pageTitle' => 'Contact Person Information'], compact('contact_person', 'members'));
 	}
 
 

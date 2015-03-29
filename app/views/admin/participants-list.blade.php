@@ -15,6 +15,7 @@
 							<li class="list-group-item"><a href="{{ URL::route('dashboard') }}">All</a></li>
 							<li class="list-group-item"><a href="{{ URL::route('admin.showJuniors') }}">Juniors (39 - below)</a></li>
 							<li class="list-group-item"><a href="{{ URL::route('admin.showSeniors') }}">Seniors (40 - above)</a></li>
+							<li class="list-group-item"><a href="{{ URL::route('admin.showContactPersons') }}">Contact Persons</a></li>
 						</ul>
 						<button type="button" id="{{ URL::route('admin.export') }}" class="btn btn-sm export">Export Participants</button>
 					</div>
@@ -47,7 +48,7 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-12">
-										<table class="table table-condensed table-hover">
+										<table id="participants-table" class="table table-condensed table-hover">
 									      <thead>
 									        <tr>
 									          <th>#</th>
@@ -57,6 +58,10 @@
 									          <th>Address</th>
 									          <th>Email Address</th>
 									          <th>Contact Number</th>
+									          <th>Date Registered</th>
+									          @if(isset($contactPerson))
+									          <th>Members</th>
+									          @endif
 									        </tr>
 									      </thead>
 									      <tbody>
@@ -69,9 +74,10 @@
 									          <td>{{ e($participant->address) }}</td>
 									          <td>{{ e($participant->email_address) }}</td>
 									          <td>{{ e($participant->contact_number) }}</td>
-									          <!-- @if($participant->registration->contactPerson)
-									          <td><a href="{{ URL::route('contact_person.show', e($participant->registration->contact_person_id)) }}">{{ e($participant->registration->contactPerson->name) }}</a></td>
-									          @endif -->
+									          <td>{{ e($participant->registration->date_registered) }}</td>
+									          @if(isset($contactPerson))
+									          <td><a href="{{URL::route('contact_person.show', e($participant->registration_id))}}" alt="List of Members"><i class="fa fa-users"></i> Members</a></td>
+									          @endif
 									        </tr>
 									        @endforeach
 									      </tbody>
